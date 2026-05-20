@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="book_list_template"
+              name="Book List">
+
+        <t t-call="website.layout">
+
+            <div class="container mt-4">
+
+                <h1>Library Books</h1>
+
+                <div class="row">
+
+                    <t t-foreach="books"
+                       t-as="book">
+
+                        <div class="col-4 mb-3">
+
+                            <div class="card p-3">
+
+                                <h3>
+                                    <t t-esc="book.name"/>
+                                </h3>
+
+                                <p>
+                                    Author:
+                                    <t t-esc="book.author"/>
+                                </p>
+
+                                <p>
+                                    Quantity:
+                                    <t t-esc="book.quantity"/>
+                                </p>
+
+                                <a t-att-href="'/library/book/%s' % book.id"
+                                   class="btn btn-primary">
+
+                                    View Detail
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </t>
+
+                </div>
+
+            </div>
+
+        </t>
+
+    </template>
+    <template id="book_detail_template"
+          name="Book Detail">
+
+    <t t-call="website.layout">
+
+        <div class="container mt-4">
+
+            <h1>
+    <t t-esc="book.name"/>
+</h1>
+
+            <p>
+                Author:
+                <t t-esc="book.author"/>
+            </p>
+
+            <p>
+                ISBN:
+                <t t-esc="book.isbn"/>
+            </p>
+
+            <p>
+                Quantity:
+                <t t-esc="book.quantity"/>
+            </p>
+
+            <p>
+                Description:
+                <t t-esc="book.description"/>
+            </p>
+
+            <a t-att-href="'/library/borrow/%s' % book.id"
+               class="btn btn-success">
+
+                Đăng ký mượn
+
+            </a>
+
+        </div>
+
+    </t>
+
+</template>
+<template id="borrow_form_template"
+          name="Borrow Form">
+
+    <t t-call="website.layout">
+
+        <div class="container mt-4">
+
+            <h1>Borrow Book</h1>
+
+            <h3>
+                <t t-esc="book.name"/>
+            </h3>
+
+            <form action="/library/borrow/submit"
+                  method="post">
+
+                <input type="hidden"
+                       name="csrf_token"
+                       t-att-value="request.csrf_token()"/>
+
+                <input type="hidden"
+                       name="book_id"
+                       t-att-value="book.id"/>
+
+                <div class="mb-3">
+
+                    <label>Name</label>
+
+                    <input type="text"
+                           name="name"
+                           class="form-control"/>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Email</label>
+
+                    <input type="email"
+                           name="email"
+                           class="form-control"/>
+
+                </div>
+
+                <button type="submit"
+                        class="btn btn-primary">
+
+                    Submit
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </t>
+
+</template>
+
+</odoo>

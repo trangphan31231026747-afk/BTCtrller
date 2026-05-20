@@ -1,1 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
 
+    <!-- LIST VIEW -->
+    <record id="library_book_list_view" model="ir.ui.view">
+
+        <field name="name">library.book.list</field>
+
+        <field name="model">library.book</field>
+
+        <field name="arch" type="xml">
+
+            <list>
+
+                <field name="name"/>
+                <field name="author"/>
+                <field name="isbn"/>
+                <field name="quantity"/>
+                <field name="state"/>
+
+            </list>
+
+        </field>
+
+    </record>
+
+
+    <!-- FORM VIEW -->
+    <record id="library_book_form_view" model="ir.ui.view">
+
+        <field name="name">library.book.form</field>
+
+        <field name="model">library.book</field>
+
+        <field name="arch" type="xml">
+
+            <form>
+
+                <sheet>
+
+                    <group>
+
+                        <field name="name"/>
+                        <field name="author"/>
+                        <field name="isbn"/>
+                        <field name="quantity"/>
+                        <field name="state"/>
+
+                    </group>
+
+                    <group>
+
+                        <field name="description"/>
+
+                    </group>
+
+                </sheet>
+
+            </form>
+
+        </field>
+
+    </record>
+
+
+    <!-- ACTION -->
+    <record id="library_book_action"
+            model="ir.actions.act_window">
+
+        <field name="name">Books</field>
+
+        <field name="res_model">library.book</field>
+
+        <field name="view_mode">list,form</field>
+
+    </record>
+
+
+    <!-- MENU -->
+    <menuitem id="library_root_menu"
+              name="Library"/>
+
+    <menuitem id="library_book_menu"
+              name="Books"
+              parent="library_root_menu"
+              action="library_book_action"/>
+
+</odoo>
